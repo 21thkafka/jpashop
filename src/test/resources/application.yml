@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test #메모리 안(jvm)에서 테스트 가능
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: create  #기본 create-drop으로 작동
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+
+#스프링 부트는 디폴트로 인메모리 설정으로 돌아가기 때문에 모두 주석처리해도 된다고 강의에서 나왔지만 아님
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
