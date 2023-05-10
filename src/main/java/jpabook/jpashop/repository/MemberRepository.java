@@ -1,17 +1,22 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    //@PersistenceContext       //스프링이 @PersistenceContext ->@Autowired로 지원, ->@RequiredArgsConstructor 사용가능
+    private final EntityManager em;
+//@RequiredArgsConstructor 사용하므로 주석
+//    public MemberRepository(EntityManager em){
+//        this.em = em;
+//    }
 
     public void save(Member member) {
         em.persist(member);
