@@ -21,6 +21,16 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional
+    public Item updateItem(Long itemId, String name, int price, int stockQuentity){
+        Item findItem = itemRepository.findOne(itemId); //영속성, 변경감지 == merge와 같은 기경 / 가급적 뱐걍감지 사용 권장
+        findItem.setPrice(price);        //merge는 지정 안한 값을 null로 변경할 수 있음
+        findItem.setName(name);
+        findItem.setStockQuantity(stockQuentity);
+        return findItem;
+
+    }
+
     public List<Item> findItems() {
         return itemRepository.findAll();
     }

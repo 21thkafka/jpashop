@@ -17,7 +17,7 @@ public class ItemRepository {
         if(item.getId() == null){   //처음 등록하는 상품인지 확인
             em.persist(item);
         } else {
-            em.merge(item);
+            em.merge(item); //병합 : 준영속 상태의 엔티티를 영속 상태로 변음
         }
     }
 
