@@ -53,4 +53,11 @@ public class MemberService {
     public Member findOne(Long memberId){   //단건 조회
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+
+    }
 }
