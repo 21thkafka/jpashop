@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,7 @@ public class Member {
    @Embedded
    private Address address;
 
+   @JsonIgnore    // 안하면 조회 api에서 무한루프 발생
    @OneToMany(mappedBy="member")
    private List<Order> orders = new ArrayList<>();
 
