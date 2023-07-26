@@ -11,6 +11,7 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+//@BatchSize(size = 100)
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
