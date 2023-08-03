@@ -10,6 +10,7 @@ import jpabook.jpashop.repository.order.query.OrderFlatDto;
 import jpabook.jpashop.repository.order.query.OrderItemQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryRepository;
+import jpabook.jpashop.service.query.OrderQueryService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -51,14 +52,19 @@ public class OrderApiController {
         return result;
     }
 
-    @GetMapping("/api/v3/orders")
-    public List<OrderDto> ordersV3(){
-        List<Order> orders = orderRepository.findAllWithItem();
+    private final OrderQueryService orderQueryService;
 
-        List<OrderDto> result = orders.stream()
-                .map(o -> new OrderDto(o))
-                .collect(toList());
-        return result;
+    @GetMapping("/api/v3/orders")
+    public List<jpabook.jpashop.service.query.OrderDto> ordersV3(){
+        // 만약 OSVI를 false로 설정시 트랜잭션 끝나면 영속성 사라지므로 데이터 조작 불가능함
+        // 새로 @Transactional(readOnly = true) 서비스 생성하고 데이터 조작 코드를 서비스 안으로 이동
+        return orderQueryService.ordersV3();
+//        List<Order> orders = orderRepository.findAllWithItem();
+//
+//        List<OrderDto> result = orders.stream()
+//                .map(o -> new OrderDto(o))
+//                .collect(toList());
+//        return result;
     }
 
     @GetMapping("/api/v3.1/orders")
