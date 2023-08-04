@@ -37,7 +37,7 @@ public class MemberServiceTest {
 
         //then
         //em.flush(); 강제로 db에 쿼리를 날림
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepository.findById(savedId).get());
     }
 
     @Test(expected = IllegalStateException.class) // 예외발생 try catch (IllegalArgumentException e) 역할함
